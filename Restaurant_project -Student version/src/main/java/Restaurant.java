@@ -64,7 +64,13 @@ public class Restaurant {
 
     public int getTotalCost (List<String> selectedItems)
     {
-        return -1;//returning -1 so that test case will always fail in compliance with failure test case methodology for TDD
+        int totalPrice = 0;
+        for (String itemName: selectedItems)
+        {
+            Item selectedItem = findItemByName(itemName);
+            totalPrice += selectedItem.getPrice();
+        }
+        return totalPrice;//returning -1 so that test case will always fail in compliance with failure test case methodology for TDD
     }
 
     public String getName() {
