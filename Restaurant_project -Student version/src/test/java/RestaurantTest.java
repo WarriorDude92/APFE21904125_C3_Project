@@ -7,12 +7,15 @@ import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(MockitoExtension.class)
 class RestaurantTest {
     Restaurant restaurant;
+    List<String> addedItems = new ArrayList<String>();
     //REFACTOR ALL THE REPEATED LINES OF CODE
     @BeforeEach
     public void init_restaurant ()
@@ -70,4 +73,33 @@ class RestaurantTest {
                 ()->restaurant.removeFromMenu("French fries"));
     }
     //<<<<<<<<<<<<<<<<<<<<<<<MENU>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+    //>>>>>>>>>>>>>>>>>>>>>>>>>>>ORDER COST<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+    @Test
+    public void adding_one_item_to_the_cart_and_retrieving_total_price ()
+    {
+        addedItems.add("Sweet corn soup");
+        int totalCost = restaurant.getTotalCost(addedItems);
+
+        assertEquals(119, totalCost);
+    }
+
+    @Test
+    public void adding_multiple_items_to_the_cart_and_retrieving_total_price ()
+    {
+        addedItems.add("Sweet corn soup");
+        addedItems.add("Vegetable lasagne");
+        int totalCost = restaurant.getTotalCost(addedItems);
+
+        assertEquals(388, totalCost);
+    }
+
+    @Test
+    public void retrieving_total_price_for_an_empty_array_list_should_be_zero ()
+    {
+        int totalCost = restaurant.getTotalCost(addedItems);
+
+        assertEquals(0, totalCost);
+    }
+    //>>>>>>>>>>>>>>>>>>>>>>>>>>>ORDER COST<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 }

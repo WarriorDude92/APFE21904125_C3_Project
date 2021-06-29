@@ -62,6 +62,11 @@ public class Restaurant {
 
     }
 
+    public int getTotalCost (List<String> selectedItems)
+    {
+        return -1;//returning -1 so that test case will always fail in compliance with failure test case methodology for TDD
+    }
+
     public String getName() {
         return name;
     }
